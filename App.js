@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+//import Pokemons from './Components/pokemons';
 import {
   SafeAreaView,
   StyleSheet,
