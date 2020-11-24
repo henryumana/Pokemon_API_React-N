@@ -8,6 +8,7 @@
 
 import React from 'react';
 //import Pokemons from './Components/pokemons';
+//import Details from './Components/pok_details';
 import {
   SafeAreaView,
   StyleSheet,
