@@ -10,7 +10,7 @@ function Details ({route}) {
   }, []);
 
   const fetchPokemonDetails = () => {
-    const {state} = props.navigation;
+    const {state} = route.navigation;
     fetch(`https://pokeapi.co/api/v2/pokemon/${state.params.pokemon}`)
       .then(res => res.json())
       .then(details => setDetails(details));
@@ -30,8 +30,7 @@ function Details ({route}) {
       <Text style={styles.text}>Name: {details.name}</Text>
       <Text style={styles.text}>Height: {details.height}</Text>
       <Text style={styles.text}>Weight: {details.weight}</Text>
-      <Text style={styles.text}>
-        Ability: {details.abilities[0].ability.name}
+      <Text style={styles.text}>Ability: {details.abilities[0].ability.name}
       </Text>
       <Text style={styles.text}>Type: {details.types[0].type.name}</Text>
     </View>
