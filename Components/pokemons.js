@@ -1,15 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-     Text,
-         Image,
-            ScrollView,
-               StyleSheet, 
-                  TextInput,
-                     TouchableOpacity,
-                    }from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet,  TextInput, TouchableOpacity, }from 'react-native';
 
-const Pokemons = props => {
+  export default function Pokemons ({navigation}){
   const [pokemons, setPokemons] = useState([]);
   const [searchfeild, setSearchfeild] = useState('');
 
@@ -26,6 +18,7 @@ const Pokemons = props => {
   return (
     <View>
       <View style={styles.searchCont}>
+        
         <TextInput
           style={styles.searchfeild}
           placeholder="Search Pokemons"
@@ -42,15 +35,15 @@ const Pokemons = props => {
             .map((pokemon, index) => {
               return (
                 <TouchableOpacity
-                  activeOpacity={0.5}
-                  key={index}
-                  style={styles.card}
-                  onPress={() =>
-                    props.navigation.navigate('Details', {
-                      pokemon: pokemon.name,
-                    })
+                activeOpacity={0.5}
+                key={index}
+                style={styles.card}
+                onPress={() =>
+                  navigation.navigate('Details', {
+                    pokemons: pokemon.name,
+                  })
                   }>
-                  <Image
+                 <Image
                     style={{width: 150, height: 150}}
                     source={{
                       uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${
@@ -68,7 +61,7 @@ const Pokemons = props => {
    );
  };
 
- export default Pokemons;
+  
 const styles = StyleSheet.create({
   container: {
     display: 'flex',

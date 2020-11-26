@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
 
-const Details = props => {
+function Details ({route}) {
   const [details, setDetails] = useState([]);
+  const{pokemons} = route.params;
 
-//Funciona como componentDidMount()
-//hacemos una llamada API al servidor 
   useEffect(() => {
     fetchPokemonDetails();
   }, []);
@@ -22,11 +21,12 @@ const Details = props => {
       <Image
         style={styles.image}
         source={{
-          url: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${
+          uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${
             details.name
           }.png`,
         }}
       />
+      <Text style={styles.text}>Name: {pokemons.name}</Text>
       <Text style={styles.text}>Name: {details.name}</Text>
       <Text style={styles.text}>Height: {details.height}</Text>
       <Text style={styles.text}>Weight: {details.weight}</Text>
