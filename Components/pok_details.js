@@ -1,21 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
 
-function Details ({route}) {
+const Details = ({route, navigation}) => {
   const [details, setDetails] = useState([]);
-  const{pokemons} = route.params;
+  const [type, setType] = useState(null);
 
   useEffect(() => {
     fetchPokemonDetails();
   }, []);
 
   const fetchPokemonDetails = () => {
-    const {state} = route.navigation;
-    fetch(`https://pokeapi.co/api/v2/pokemon/${state.params.pokemon}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${route.params.pokemon}`)
       .then(res => res.json())
-      .then(details => setDetails(details));
+      .then(details => {
+        setDetails(details);
+        return details;
+      })
+      .then(details => setType(details.types[0].type.name));
   };
-
   return details.name ? (
     <View style={{flex: 1, alignItems: 'center'}}>
       <Image
@@ -26,12 +28,10 @@ function Details ({route}) {
           }.png`,
         }}
       />
-      <Text style={styles.text}>Name: {pokemons.name}</Text>
       <Text style={styles.text}>Name: {details.name}</Text>
       <Text style={styles.text}>Height: {details.height}</Text>
       <Text style={styles.text}>Weight: {details.weight}</Text>
-      <Text style={styles.text}>Ability: {details.abilities[0].ability.name}
-      </Text>
+      <Text style={styles.text}>Ability: {details.abilities[0].ability.name}</Text>
       <Text style={styles.text}>Type: {details.types[0].type.name}</Text>
     </View>
   ) : (
